@@ -1,13 +1,14 @@
-package sv.edu.ues.fia.minedasboard;
+package sv.edu.ues.fia.minedashboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Repitencia extends AppCompatActivity {
+public class MatriculaEscolar extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repitencia);
+        setContentView(R.layout.activity_matricula_escolar);
+        //crear codigo
     }
 }

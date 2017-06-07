@@ -1,13 +1,13 @@
-package sv.edu.ues.fia.minedasboard;
+package sv.edu.ues.fia.minedashboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Sobreedad extends AppCompatActivity {
+public class CentroEducativo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sobreedad);
+        setContentView(sv.edu.ues.fia.minedasboard.R.layout.activity_centro_educativo);
     }
 }

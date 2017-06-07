@@ -1,4 +1,4 @@
-package sv.edu.ues.fia.minedasboard;
+package sv.edu.ues.fia.minedashboard;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
