@@ -10,6 +10,5 @@ public class MatriculaEscolar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matricula_escolar);
         //crear codigo
-
     }
 }
