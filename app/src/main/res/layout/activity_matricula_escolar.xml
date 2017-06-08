@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sv.edu.ues.fia.minedasboard.MatriculaEscolar">
+    tools:context="sv.edu.ues.fia.minedashboard.MatriculaEscolar">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp" />
+
 
 </android.support.constraint.ConstraintLayout>
