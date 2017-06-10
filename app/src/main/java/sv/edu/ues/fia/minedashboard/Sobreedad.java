@@ -8,6 +8,6 @@ public class Sobreedad extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(sv.edu.ues.fia.minedasboard.R.layout.activity_sobreedad);
+        setContentView(sv.edu.ues.fia.minedashboard.R.layout.activity_sobreedad);
     }
 }
