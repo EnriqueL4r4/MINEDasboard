@@ -27,8 +27,6 @@ public class CentroEducativo extends AppCompatActivity {
         BarChart barChart = (BarChart) findViewById(R.id.barChart);
         PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
         PieChart pieChart2 = (PieChart) findViewById(R.id.pieChart2);
-        BarChart barChart2 = (BarChart) findViewById(R.id.barChart2);
-        HorizontalBarChart barChart3 = (HorizontalBarChart) findViewById(R.id.barChart3);
 
         // CENTROS EDUCATIVOS TOTAL
         ArrayList<BarEntry> entries = new ArrayList<>();
