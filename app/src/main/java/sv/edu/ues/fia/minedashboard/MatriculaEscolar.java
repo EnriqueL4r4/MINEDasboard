@@ -16,10 +16,14 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class MatriculaEscolar extends AppCompatActivity {
+    private String titulo;
+    private int cantTotal;
+    private float cantPublico, cantPrivado;
+    private float cantRural, cantUrbano;
+    private int cantMasculino, cantFemenino, cantNoEsp;
+    private int cantInicial, cantParvularia, cantBasica, cantMedia, cantAdulto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +37,14 @@ public class MatriculaEscolar extends AppCompatActivity {
         HorizontalBarChart barChart3 = (HorizontalBarChart) findViewById(R.id.barChart3);
 
         // MATRICULA TOTAL
+        cantTotal = 1495552;
+        titulo = "NACIONAL";
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(1495552, 0));
-
+        entries.add(new BarEntry(cantTotal, 0));
         BarDataSet dataset = new BarDataSet(entries, "MATRICULA TOTAL");
-
         ArrayList<String> labels = new ArrayList<String>();
-        labels.add("NACIONAL");
-
-        BarData data = new BarData(labels, dataset);
+        labels.add(titulo);
+        BarData data = new BarData(labels,dataset);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setData(data);
         barChart.setDescription(" ");
@@ -49,82 +52,69 @@ public class MatriculaEscolar extends AppCompatActivity {
 
 
         //MATRICULA POR SECTOR
-        //definimos algunos atributos
+        cantPrivado = 234495;
+        cantPublico = 1261057;
+        float privado = (cantPrivado*100/cantTotal);
+        float publico = (cantPublico*100/cantTotal);
+
         pieChart.setHoleRadius(40f);
         pieChart.setRotationEnabled(true);
         pieChart.animateXY(1500, 1500);
-
-        //creamos una lista para los valores Y
         ArrayList<Entry> valsY = new ArrayList<Entry>();
-        valsY.add(new Entry(234495* 100 / 1495552,0));
-        valsY.add(new Entry(1261057 * 100 / 1495552,1));
-
-        //creamos una lista para los valores X
+        valsY.add(new Entry(privado,0));
+        valsY.add(new Entry(publico,1));
         ArrayList<String> valsX = new ArrayList<String>();
         valsX.add("%Privados");
         valsX.add("%Públicos");
-
-        //creamos una lista de colores
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(Color.RED);
+        colors.add(Color.BLUE);
         colors.add(Color.GREEN);
-
-        //seteamos los valores de Y y los colores
         PieDataSet set1 = new PieDataSet(valsY, "MATRICULA POR SECTOR");
         set1.setSliceSpace(0f);
         set1.setColors(colors);
-
-        //seteamos los valores de X
         PieData dato1 = new PieData(valsX, set1);
         pieChart.setData(dato1);
         pieChart.setDescription(" ");
         pieChart.invalidate();
 
         //MATRICULA POR ZONA
-        //definimos algunos atributos
+        cantRural = 658952;
+        cantUrbano = 836600;
+        float rural = (cantRural*100/cantTotal);
+        float urbano = (cantUrbano*100/cantTotal);
         pieChart2.setHoleRadius(40f);
         pieChart2.setRotationEnabled(true);
         pieChart2.animateXY(1500, 1500);
-
-        //creamos una lista para los valores Y
         ArrayList<Entry> valsY1 = new ArrayList<Entry>();
-        valsY1.add(new Entry((658952 * 100 / 1495552), 0));
-        valsY1.add(new Entry(836600 * 100 / 1495552,1));
-
-        //creamos una lista para los valores X
+        valsY1.add(new Entry(rural, 0));
+        valsY1.add(new Entry(urbano,1));
         ArrayList<String> valsX1 = new ArrayList<String>();
         valsX1.add("%Rural");
         valsX1.add("%Urbano");
-
-        //creamos una lista de colores
         ArrayList<Integer> colors1 = new ArrayList<Integer>();
         colors1.add(Color.GREEN);
-        colors1.add(Color.BLUE);
-
-        //seteamos los valores de Y y los colores
+        colors1.add(Color.RED);
         PieDataSet set2 = new PieDataSet(valsY1,"MATRICULA POR ZONA");
         set2.setSliceSpace(0f);
         set2.setColors(colors1);
-
-        //seteamos los valores de X
         PieData dato2 = new PieData(valsX1, set2);
         pieChart2.setData(dato2);
         pieChart2.setDescription(" ");
         pieChart2.invalidate();
 
         // MATRICULA POR SEXO
+        cantMasculino = 765056;
+        cantFemenino = 727761;
+        cantNoEsp = 735;
         ArrayList<BarEntry> entries2 = new ArrayList<>();
-        entries2.add(new BarEntry(735,0));
-        entries2.add(new BarEntry(765056, 1));
-        entries2.add(new BarEntry(727761, 2));
-
+        entries2.add(new BarEntry(cantMasculino, 0));
+        entries2.add(new BarEntry(cantFemenino, 1));
+        entries2.add(new BarEntry(cantNoEsp,2));
         BarDataSet dataset2 = new BarDataSet(entries2, "MATRICULA POR SEXO");
-
         ArrayList<String> labels2 = new ArrayList<String>();
-        labels2.add("No especificó");
         labels2.add("Masculino");
         labels2.add("Femenino");
-
+        labels2.add("No especificó");
         BarData data2 = new BarData(labels2, dataset2);
         dataset2.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart2.setData(data2);
@@ -132,22 +122,24 @@ public class MatriculaEscolar extends AppCompatActivity {
         barChart2.animateY(5000);
 
         // MATRICULA POR NIVEL EDUCATIVO
+        cantInicial = 11912;
+        cantParvularia = 228456;
+        cantBasica = 1046946;
+        cantMedia = 205351;
+        cantAdulto = 2887;
         ArrayList<BarEntry> entries3 = new ArrayList<>();
-        entries3.add(new BarEntry(11912, 4));
-        entries3.add(new BarEntry(228456, 3));
-        entries3.add(new BarEntry(1046946, 2));
-        entries3.add(new BarEntry(205351, 1));
-        entries3.add(new BarEntry(2887, 0));
-
+        entries3.add(new BarEntry(cantInicial, 4));
+        entries3.add(new BarEntry(cantParvularia, 3));
+        entries3.add(new BarEntry(cantBasica, 2));
+        entries3.add(new BarEntry(cantMedia, 1));
+        entries3.add(new BarEntry(cantAdulto, 0));
         BarDataSet dataset3 = new BarDataSet(entries3, "MATRICULA POR NIVEL EDUCATIVO");
-
         ArrayList<String> labels3 = new ArrayList<String>();
         labels3.add("Edu. de Adultos");
         labels3.add("Edu. Media");
         labels3.add("       Edu. Básica");
         labels3.add("Edu. Parvularia");
         labels3.add("Edu. Inicial");
-
         BarData data3 = new BarData(labels3, dataset3);
         dataset3.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart3.setData(data3);

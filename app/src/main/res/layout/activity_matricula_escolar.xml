@@ -87,7 +87,7 @@
             <com.github.mikephil.charting.charts.HorizontalBarChart
                 android:id="@+id/barChart3"
                 android:layout_width="350dp"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:layout_margin="10dp"
                 app:layout_constraintLeft_toRightOf="@+id/barChart2"
                 app:layout_constraintRight_toRightOf="@+id/barChart2"
