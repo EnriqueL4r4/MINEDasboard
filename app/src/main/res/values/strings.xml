@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MINEDashboard</string>
     <string name="textView">INDICADORES EDUCATIVOS</string>
+    <string name="consultar">Consultar</string>
+    <string name="departamento">Departamento:</string>
+    <string name="matricula_escolar">MATRICULA ESCOLAR</string>
+    <string name="municipio">Municipio:</string>
 </resources>

@@ -29,6 +29,46 @@
             android:orientation="vertical"
             android:weightSum="1">
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/matricula_escolar" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/departamento"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/sp_departamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/municipio"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/sp_municipio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/consultar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="consultar"
+                android:text="@string/consultar"
+                android:layout_margin="10dp"/>
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
                 android:layout_width="350dp"

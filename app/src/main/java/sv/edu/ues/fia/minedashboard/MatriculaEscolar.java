@@ -1,8 +1,14 @@
 package sv.edu.ues.fia.minedashboard;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -17,18 +23,59 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
-public class MatriculaEscolar extends AppCompatActivity {
+public class MatriculaEscolar extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private String titulo;
     private int cantTotal;
     private float cantPublico, cantPrivado;
     private float cantRural, cantUrbano;
     private int cantMasculino, cantFemenino, cantNoEsp;
     private int cantInicial, cantParvularia, cantBasica, cantMedia, cantAdulto;
+    int posicion;
+    String seleccion;
+    /*
+    Instancias para los Views
+     */
+    Spinner spdepto;
+    Spinner spmun;
+    /*
+    Adaptadores para los Spinners
+     */
+    //SimpleCursorAdapter departamentoSpinnerAdapter;
+    //SimpleCursorAdapter municipioSpinnerAdapter;
+    /*
+    Nuestro origen de datos
+     */
+    ControlDB helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matricula_escolar);
+        //helper = new ControlDB(this,null,null,1);
+        //this.departamento = (Spinner) findViewById(R.id.sp_departamento);
+        // this.municipio = (Spinner) findViewById(R.id.sp_municipio);
+        //departamentoSpinnerAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, helper.getAllDepartamento(),new String[]{"nombre"}, new int[]{android.R.id.text1},SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        //departamento.setAdapter(departamentoSpinnerAdapter);
+        //departamento.setOnItemSelectedListener(this);
+        ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
+        try {
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db = helper.getReadableDatabase();
+            Cursor rd =db.rawQuery("Select nombre from Departamento order by id_depto", null);
+            Departamento depto;
+            while(rd.moveToNext()){
+                depto = new Departamento();
+                depto.setId_depto(rd.getString(0));
+                depto.setNombre(rd.getString(1));
+                departamentos.add(depto);
+            }
+        } catch (Exception e){}
+
+        spdepto = (Spinner) findViewById(R.id.sp_departamento);
+        ArrayAdapter<Departamento> adaptador = new ArrayAdapter<Departamento>(this, android.R.layout.simple_spinner_dropdown_item, departamentos);
+        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spdepto.setAdapter(adaptador);
+        spdepto.setOnItemSelectedListener(this);
 
         BarChart barChart = (BarChart) findViewById(R.id.barChart);
         PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
@@ -145,6 +192,18 @@ public class MatriculaEscolar extends AppCompatActivity {
         barChart3.setData(data3);
         barChart3.setDescription(" ");
         barChart3.animateY(5000);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        this.posicion = position;
+        seleccion = parent.getItemAtPosition(position).toString();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
