@@ -23,7 +23,8 @@ public class Departamento {
         this.nombre = nombre;
     }
 
-    public String toString(){
+    public String toString() {
         return nombre;
     }
+
 }

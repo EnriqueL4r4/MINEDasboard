@@ -33,20 +33,22 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/matricula_escolar" />
+                android:text="@string/matricula_escolar"
+                android:layout_margin="10dp" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/departamento"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_margin="5dp"/>
 
             <Spinner
                 android:id="@+id/sp_departamento"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -57,9 +59,9 @@
 
             <Spinner
                 android:id="@+id/sp_municipio"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp" />
 
             <Button
                 android:id="@+id/consultar"

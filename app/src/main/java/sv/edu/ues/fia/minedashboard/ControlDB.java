@@ -1,7 +1,6 @@
 package sv.edu.ues.fia.minedashboard;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -11,35 +10,51 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ControlDB extends SQLiteOpenHelper {
     public ControlDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "DBJurisdiccion", factory, version);
+        super(context, name, factory, version);
     }
+
+  /*  public ControlDB(Context context){
+        super(  context,
+                DataBaseScript.DATABASE_NAME, null, DataBaseScript.DATABASE_VERSION);
+
+    }*/
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Cración de tablas
+       /* db.execSQL(DataBaseScript.CREATE_DEPTOS_SCRIPT);
+        db.execSQL(DataBaseScript.CREATE_MUNI_SCRIPT);
+
+        //Inserción de registros
+
+        db.execSQL(DataBaseScript.INSERT_DEPTOS_SCRIPT);
+        db.execSQL(DataBaseScript.INSERT_MUNI_SCRIPT);*/
+
+
         //creación de Tablas de Departamento y municipio
         db.execSQL("CREATE TABLE Departamento (id_depto VARCHAR(4) PRIMARY KEY  NOT NULL , nombre TEXT);");
-        db.execSQL("CREATE TABLE Municipio (id_mun VARCHAR(4) PRIMARY KEY  NOT NULL , nombre TEXT, id_depto VARCHAR(4) FOREIGN KEY);");
+        db.execSQL("CREATE TABLE Municipio (id_mun VARCHAR(4) PRIMARY KEY  NOT NULL , nombre TEXT, id_depto VARCHAR(4));");
 
         //Inserción de datos en la tabla Departamento
-        db.execSQL("INSERT INTO Departamento VALUES('0000','NACIONAL');");
-        db.execSQL("INSERT INTO Departamento VALUES('0001','AHUACHAPAN');");
-        db.execSQL("INSERT INTO Departamento VALUES('0002','SANTA ANA');");
-        db.execSQL("INSERT INTO Departamento VALUES('0003','SONSONATE');");
-        db.execSQL("INSERT INTO Departamento VALUES('0004','CHALATENANGO');");
-        db.execSQL("INSERT INTO Departamento VALUES('0005','LA LIBERTAD');");
-        db.execSQL("INSERT INTO Departamento VALUES('0006','SAN SALVADOR');");
-        db.execSQL("INSERT INTO Departamento VALUES('0007','CUSCATLAN');");
-        db.execSQL("INSERT INTO Departamento VALUES('0008','LA PAZ');");
-        db.execSQL("INSERT INTO Departamento VALUES('0009','CABAÑAS');");
-        db.execSQL("INSERT INTO Departamento VALUES('0010','SAN VICENTE');");
-        db.execSQL("INSERT INTO Departamento VALUES('0011','USULUTAN');");
-        db.execSQL("INSERT INTO Departamento VALUES('0012','SAN MIGUEL');");
-        db.execSQL("INSERT INTO Departamento VALUES('0013','MORAZAN');");
-        db.execSQL("INSERT INTO Departamento VALUES('0014','LA UNION');");
+        db.execSQL("INSERT INTO Departamento VALUES('0000','Seleccione departamento');");
+        db.execSQL("INSERT INTO Departamento VALUES('0001','Ahuachapán');");
+        db.execSQL("INSERT INTO Departamento VALUES('0002','Santa Ana');");
+        db.execSQL("INSERT INTO Departamento VALUES('0003','Sonsonate');");
+        db.execSQL("INSERT INTO Departamento VALUES('0004','Chalatenango');");
+        db.execSQL("INSERT INTO Departamento VALUES('0005','La Libertad');");
+        db.execSQL("INSERT INTO Departamento VALUES('0006','San Salvador');");
+        db.execSQL("INSERT INTO Departamento VALUES('0007','Cuscatlán');");
+        db.execSQL("INSERT INTO Departamento VALUES('0008','La Paz');");
+        db.execSQL("INSERT INTO Departamento VALUES('0009','Cabañas');");
+        db.execSQL("INSERT INTO Departamento VALUES('0010','San Vicente');");
+        db.execSQL("INSERT INTO Departamento VALUES('0011','Usulután');");
+        db.execSQL("INSERT INTO Departamento VALUES('0012','San Miguel');");
+        db.execSQL("INSERT INTO Departamento VALUES('0013','Morazán');");
+        db.execSQL("INSERT INTO Departamento VALUES('0014','La Unión');");
 
         //Inserción de datos en la tabla Municipio
-        db.execSQL("INSERT INTO Municipio VALUES('0000','NACIONAL','0000');");
-        db.execSQL("INSERT INTO Municipio VALUES('0101','AHUACHAPAN','0001');");
+        db.execSQL("INSERT INTO Municipio VALUES('0000','Seleccione municipio','0000');");
+        db.execSQL("INSERT INTO Municipio VALUES('0101','Ahuachapán','0001');");
         db.execSQL("INSERT INTO Municipio VALUES('0102','APANECA','0001');");
         db.execSQL("INSERT INTO Municipio VALUES('0103','ATIQUIZAYA','0001');");
         db.execSQL("INSERT INTO Municipio VALUES('0104','CONCEPCION DE ATACO','0001');");
@@ -306,22 +321,5 @@ public class ControlDB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-    }
-
-
-    public Cursor getAllDepartamento() {
-        SQLiteDatabase bd = getReadableDatabase();
-
-        return bd.rawQuery("Select * from Departamento:", null);
-    }
-
-    public Cursor getMunByDepto(String deptoSelection) {
-        SQLiteDatabase bd = getWritableDatabase();
-
-        //Argumentos del WHERE
-        String selectionArgs[] = new String[]{deptoSelection};
-
-        String query = "select id_mun, nombre from Municpio where id_depto = ?";
-        return bd.rawQuery(query,selectionArgs);
     }
 }

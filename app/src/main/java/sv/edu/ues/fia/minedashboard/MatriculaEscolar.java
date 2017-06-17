@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -30,38 +33,54 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
     private float cantRural, cantUrbano;
     private int cantMasculino, cantFemenino, cantNoEsp;
     private int cantInicial, cantParvularia, cantBasica, cantMedia, cantAdulto;
-    int posicion;
-    String seleccion;
+
     /*
     Instancias para los Views
      */
-    Spinner spdepto;
-    Spinner spmun;
-    /*
-    Adaptadores para los Spinners
-     */
-    //SimpleCursorAdapter departamentoSpinnerAdapter;
-    //SimpleCursorAdapter municipioSpinnerAdapter;
-    /*
-    Nuestro origen de datos
-     */
+    Spinner deptosSpinner;
+    Spinner muniSpinner;
+    TextView lyricList;
     ControlDB helper;
+    String idDepto;
+
+    //Adaptadores para los Spinners
+   /* SimpleCursorAdapter deptosSpinnerAdapter;
+    SimpleCursorAdapter muniSpinnerAdapter;*/
+
+   //DataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matricula_escolar);
-        //helper = new ControlDB(this,null,null,1);
-        //this.departamento = (Spinner) findViewById(R.id.sp_departamento);
-        // this.municipio = (Spinner) findViewById(R.id.sp_municipio);
-        //departamentoSpinnerAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, helper.getAllDepartamento(),new String[]{"nombre"}, new int[]{android.R.id.text1},SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        //departamento.setAdapter(departamentoSpinnerAdapter);
-        //departamento.setOnItemSelectedListener(this);
+
+      /*  dataSource = new DataSource(this);
+
+        deptosSpinner = (Spinner) findViewById(R.id.sp_departamento);
+        muniSpinner = (Spinner) findViewById(R.id.sp_municipio);
+
+        lyricList = (TextView) findViewById(R.id.textView4);
+
+        deptosSpinnerAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item,//Layout simple
+                dataSource.getAllDepartamentos(),//Todos los registros
+                new String[]{DataBaseScript.DeptosColumns.NAME_DEPTOS},//Mostrar solo el nombre
+                new int[]{android.R.id.text1},//View para el nombre
+                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);//Observer para el refresco
+
+
+        //Seteando Adaptador de GenreSpinner
+        deptosSpinner.setAdapter(deptosSpinnerAdapter);
+
+        //Relacionado la escucha de selección de GenreSpinner
+        deptosSpinner.setOnItemSelectedListener(this);*/
+
+
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
         try {
             helper = new ControlDB(this, null, null, 1);
             SQLiteDatabase db = helper.getReadableDatabase();
-            Cursor rd =db.rawQuery("Select nombre from Departamento order by id_depto", null);
+            Cursor rd = db.rawQuery("Select * from Departamento", null);
             Departamento depto;
             while(rd.moveToNext()){
                 depto = new Departamento();
@@ -71,11 +90,11 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
             }
         } catch (Exception e){}
 
-        spdepto = (Spinner) findViewById(R.id.sp_departamento);
+        deptosSpinner = (Spinner) findViewById(R.id.sp_departamento);
         ArrayAdapter<Departamento> adaptador = new ArrayAdapter<Departamento>(this, android.R.layout.simple_spinner_dropdown_item, departamentos);
-        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spdepto.setAdapter(adaptador);
-        spdepto.setOnItemSelectedListener(this);
+        deptosSpinner.setAdapter(adaptador);
+        deptosSpinner.setOnItemSelectedListener(this);
+
 
         BarChart barChart = (BarChart) findViewById(R.id.barChart);
         PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
@@ -197,13 +216,175 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        this.posicion = position;
-        seleccion = parent.getItemAtPosition(position).toString();
+        String selected = parent.getItemAtPosition(position).toString();
 
+        if(selected.equals("Ahuachapán")){
+            idDepto = "0001";
+        }else{
+            if(selected.equals("Santa Ana")){
+                idDepto = "0002";
+            }else {
+                if(selected.equals("Sonsonate")){
+                    idDepto = "0003";
+                }else{
+                    if (selected.equals("Chalatenango")){
+                        idDepto = "0004";
+                    }else{
+                        if(selected.equals("La Libertad")){
+                            idDepto = "0005";
+                        }else{
+                            if (selected.equals("San Salvador")){
+                                idDepto = "0006";
+                            }else{
+                                if (selected.equals("Cuscatlán")){
+                                    idDepto = "0007";
+                                }else{
+                                    if (selected.equals("La Paz")){
+                                        idDepto = "0008";
+                                    }else{
+                                        if (selected.equals("Cabañas")){
+                                            idDepto = "0009";
+                                        }else{
+                                            if (selected.equals("San Vicente")){
+                                                idDepto = "0010";
+                                            }else{
+                                                if (selected.equals("Usulután")){
+                                                    idDepto = "0011";
+                                                }else{
+                                                    if (selected.equals("San Miguel")){
+                                                        idDepto = "0012";
+                                                    }else{
+                                                        if (selected.equals("Morazán")){
+                                                            idDepto = "0013";
+                                                        }else {
+                                                            if (selected.equals("La Unión")){
+                                                                idDepto = "0014";
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        ArrayList<Municipio> municpios = new ArrayList<Municipio>();
+        try {
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db = helper.getReadableDatabase();
+            Cursor rd = db.rawQuery("Select * from Municipio where id_depto='" + idDepto +"'", null);
+            Municipio muni;
+            while(rd.moveToNext()){
+                muni = new Municipio();
+                muni.setId_mun(rd.getString(0));
+                muni.setNombre(rd.getString(1));
+                muni.setId_depto(rd.getString(2));
+                municpios.add(muni);
+            }
+        } catch (Exception e){}
+
+        muniSpinner = (Spinner) findViewById(R.id.sp_municipio);
+        ArrayAdapter<Municipio> adaptador = new ArrayAdapter<Municipio>(this, android.R.layout.simple_spinner_dropdown_item, municpios);
+        muniSpinner.setAdapter(adaptador);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
+   /*private void activeMunSpinner(String deptoSelection) {
+
+
+        ArrayList<Municipio> municipios = new ArrayList<Municipio>();
+        try {
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db = helper.getWritableDatabase();
+            Cursor rd = db.rawQuery("Select * from Municipio where = ", null);
+            Municipio muni;
+            while(rd.moveToNext()){
+                muni = new Municipio();
+                muni.setId_depto(rd.getString(0));
+                muni.setNombre(rd.getString(1));
+                muni.setId_depto(rd.getString(2));
+                municipios.add(muni);
+            }
+        } catch (Exception e){}
+
+        muniSpinner = (Spinner) findViewById(R.id.sp_municipio);
+        ArrayAdapter<Municipio> adaptador = new ArrayAdapter<Municipio>(this, android.R.layout.simple_spinner_dropdown_item, municipios);
+        muniSpinner.setAdapter(adaptador);
+
+        //deptosSpinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+  /* @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int idSpinner = parent.getId();
+
+        switch(idSpinner){
+            case R.id.sp_departamento:
+                Cursor c1 = (Cursor) parent.getItemAtPosition(position);
+                String deptosSelection = c1.getString(c1.getColumnIndex(DataBaseScript.DeptosColumns.ID_DEPTOS));
+
+                activeMunSpinner(deptosSelection);
+                break;
+
+            case R.id.sp_municipio:
+
+                //Obteniendo el nombre del municipio seleccionado
+
+                Cursor c2 = (Cursor) parent.getItemAtPosition(position);
+                String muniSelection = c2.getString(c2.getColumnIndex(DataBaseScript.MuniColumns.NAME_MUNI));
+
+
+                //Cambiando el texto de LyricList según el Artista seleccionado
+
+                lyricList.setText("Letra de "+" "+muniSelection);
+
+                break;
+        }
+
+    }
+
+   private void activeMunSpinner(String deptosSelection) {
+
+        //Creando Adaptador para ArtistSpinner con el id del género
+
+        muniSpinnerAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item,
+                dataSource.getMuniByDeptos(deptosSelection),
+                new String[]{DataBaseScript.MuniColumns.NAME_MUNI},
+                new int[]{android.R.id.text1},
+                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+
+
+        //Seteando el adaptador creado
+
+        muniSpinner.setAdapter(muniSpinnerAdapter);
+
+        //Relacionado la escucha
+
+        muniSpinner.setOnItemSelectedListener(this);
+
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }*/
 }
