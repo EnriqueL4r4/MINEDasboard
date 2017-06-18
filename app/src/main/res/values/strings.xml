@@ -5,4 +5,6 @@
     <string name="departamento">Departamento:</string>
     <string name="matricula_escolar">MATRICULA ESCOLAR</string>
     <string name="municipio">Municipio:</string>
+    <string name="centros_educativos">CENTROS EDUCATIVOS</string>
+    <string name="sobreedad">SOBREEDAD</string>
 </resources>
