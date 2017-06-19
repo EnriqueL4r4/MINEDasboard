@@ -27,16 +27,13 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 public class MatriculaEscolar extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    private String titulo;
-   /* private int cantTotal;
-    private float cantPublico, cantPrivado;
-    private float cantRural, cantUrbano;
-    private int cantMasculino, cantFemenino, cantNoEsp;
-    private int cantInicial, cantParvularia, cantBasica, cantMedia, cantAdulto;*/
+    String titulo;
+    int cantTotal;
+    float cantPublico, cantPrivado;
+    float cantRural, cantUrbano;
+    int cantMasculino, cantFemenino, cantNoEsp;
+    int cantInicial, cantParvularia, cantBasica, cantMedia, cantAdulto;
 
-    /*
-    Instancias para los Views
-     */
     Spinner deptosSpinner;
     Spinner muniSpinner;
     ControlDB helper;
@@ -47,13 +44,12 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
     BarChart barChart2;
     HorizontalBarChart barChart3;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matricula_escolar);
 
+        //Población del Spinner de Departamentos
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
         try {
             helper = new ControlDB(this, null, null, 1);
@@ -194,6 +190,7 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         String selected = parent.getItemAtPosition(position).toString();
 
         if(selected.equals("Ahuachapán")){
@@ -254,7 +251,7 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
             }
         }
 
-
+        //Población del Spinner de Municipios
         ArrayList<Municipio> municpios = new ArrayList<Municipio>();
         try {
             helper = new ControlDB(this, null, null, 1);
@@ -283,42 +280,87 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
     public void consultar(View view){
         String depa = deptosSpinner.getSelectedItem().toString();
         String muni = muniSpinner.getSelectedItem().toString();
-        String idDepto, idMuni;
-//consulta del id_depto;
+        String id_depto = null, id_muni = null;
+
+        //Consulta del id_depto;
         helper = new ControlDB(this, null, null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
         Cursor rd = db.rawQuery("select id_depto from Departamento where nombre ='"+depa+"'", null);
         if(rd != null){
             try{
                 if(rd.moveToFirst()){
-                    idDepto=rd.getString(0);
+                    id_depto = rd.getString(0);
                 }
             }catch (Exception e){}
         }
-//consulta del id_mun
+
+        //Consulta los datos del indicador Matricula
+        if(muni.equals(" ")){
         helper = new ControlDB(this, null, null, 1);
-        SQLiteDatabase db2 = helper.getWritableDatabase();
-        Cursor rd2 = db2.rawQuery("select id_depto from Municipio where nombre ='"+muni+"'", null);
-        if(rd != null){
-            try{
-                if(rd2.moveToFirst()){
-                    idMuni=rd.getString(0);
-                }
-            }catch (Exception e){}
+        SQLiteDatabase db3 = helper.getWritableDatabase();
+        Cursor rd3 = db3.rawQuery("select * from Matricula where codJurisdiccion='"+id_depto+"'", null);
+            if(rd != null){
+                try{
+                    if(rd3.moveToFirst()){
+                        cantPublico = rd3.getInt(2);
+                        cantPrivado =  rd3.getInt(3);
+                        cantRural = rd3.getInt(4);
+                        cantUrbano = rd3.getInt(5);
+                        cantMasculino =  rd3.getInt(6);
+                        cantFemenino = rd3.getInt(7);
+                        cantNoEsp = rd3.getInt(8);
+                        cantInicial =  rd3.getInt(9);
+                        cantParvularia = rd3.getInt(10);
+                        cantBasica = rd3.getInt(11);
+                        cantMedia =  rd3.getInt(12);
+                        cantAdulto = rd3.getInt(13);
+                        cantTotal = rd3.getInt(14);
+                    }
+                }catch (Exception e){}
+            }
+
+        }else{
+            //Consulta del id_mun
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db2 = helper.getWritableDatabase();
+            Cursor rd2 = db2.rawQuery("select id_mun from Municipio where nombre ='"+muni+"'", null);
+            if(rd != null){
+                try{
+                    if(rd2.moveToFirst()){
+                        id_muni = rd2.getString(0);
+                    }
+                }catch (Exception e){}
+            }
+
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db4 = helper.getWritableDatabase();
+            Cursor rd4 = db4.rawQuery("select * from Matricula where codJurisdiccion='"+id_muni+"'", null);
+            if(rd != null){
+                try{
+                    if(rd4.moveToFirst()){
+                        cantPublico = rd4.getInt(2);
+                        cantPrivado =  rd4.getInt(3);
+                        cantRural = rd4.getInt(4);
+                        cantUrbano = rd4.getInt(5);
+                        cantMasculino =  rd4.getInt(6);
+                        cantFemenino = rd4.getInt(7);
+                        cantNoEsp = rd4.getInt(8);
+                        cantInicial =  rd4.getInt(9);
+                        cantParvularia = rd4.getInt(10);
+                        cantBasica = rd4.getInt(11);
+                        cantMedia =  rd4.getInt(12);
+                        cantAdulto = rd4.getInt(13);
+                        cantTotal = rd4.getInt(14);
+                    }
+                }catch (Exception e){}
+            }
         }
 
-        int cantTotal=149553;
-        float cantPublico=1261057, cantPrivado=234495;
-        float cantRural=658952, cantUrbano=836600;
-        int cantMasculino=765056, cantFemenino=727761, cantNoEsp=735;
-        int cantInicial=11912, cantParvularia=228456, cantBasica=1046946, cantMedia=205351, cantAdulto=2887;
-
-        Graficar(depa, muni,cantTotal,cantPublico,cantPrivado,cantRural,cantUrbano,cantMasculino,cantFemenino,cantNoEsp,cantInicial,cantParvularia,cantBasica,cantMedia,cantAdulto);
+       Graficar(depa, muni,cantTotal,cantPublico,cantPrivado,cantRural,cantUrbano,cantMasculino,cantFemenino,cantNoEsp,cantInicial,cantParvularia,cantBasica,cantMedia,cantAdulto);
     }
 
-    public void Graficar(String depto, String mun, int cantTotal,float cantPublico, float cantPrivado, float cantRural, float cantUrbano,  int cantMasculino, int cantFemenino, int cantNoEsp, int cantInicial, int cantParvularia, int cantBasica, int cantMedia, int cantAdulto){
+    public void Graficar(String depto, String mun, int cantTotal,float cantPublico, float cantPrivado, float cantRural,float cantUrbano,  int cantMasculino, int cantFemenino, int cantNoEsp, int cantInicial, int cantParvularia, int cantBasica, int cantMedia, int cantAdulto){
         // MATRICULA TOTAL
-        //cantTotal = 1495552;
         titulo = depto+", "+mun;
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(cantTotal, 0));
@@ -333,8 +375,6 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
 
 
         //MATRICULA POR SECTOR
-       // cantPrivado = 234495;
-       // cantPublico = 1261057;
         float privado = (cantPrivado*100/cantTotal);
         float publico = (cantPublico*100/cantTotal);
 
@@ -355,12 +395,10 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         set1.setColors(colors);
         PieData dato1 = new PieData(valsX, set1);
         pieChart.setData(dato1);
-        pieChart.setDescription(" ");
+        pieChart.setDescription("Cantidad de estudiantes, Sector Privado: "+cantPrivado+"; Sector Público: "+cantPublico);
         pieChart.invalidate();
 
         //MATRICULA POR ZONA
-        //cantRural = 658952;
-        //cantUrbano = 836600;
         float rural = (cantRural*100/cantTotal);
         float urbano = (cantUrbano*100/cantTotal);
         pieChart2.setHoleRadius(40f);
@@ -380,13 +418,10 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         set2.setColors(colors1);
         PieData dato2 = new PieData(valsX1, set2);
         pieChart2.setData(dato2);
-        pieChart2.setDescription(" ");
+        pieChart2.setDescription("Cantidad de estudiantes, Zona Rural: "+cantRural+"; Zona Urbana: "+cantUrbano);
         pieChart2.invalidate();
 
         // MATRICULA POR SEXO
-        //cantMasculino = 765056;
-        //cantFemenino = 727761;
-        //cantNoEsp = 735;
         ArrayList<BarEntry> entries2 = new ArrayList<>();
         entries2.add(new BarEntry(cantMasculino, 0));
         entries2.add(new BarEntry(cantFemenino, 1));
@@ -403,11 +438,6 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         barChart2.animateY(5000);
 
         // MATRICULA POR NIVEL EDUCATIVO
-        //cantInicial = 11912;
-        //cantParvularia = 228456;
-        //cantBasica = 1046946;
-        //cantMedia = 205351;
-        //cantAdulto = 2887;
         ArrayList<BarEntry> entries3 = new ArrayList<>();
         entries3.add(new BarEntry(cantInicial, 4));
         entries3.add(new BarEntry(cantParvularia, 3));
@@ -427,7 +457,5 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         barChart3.setDescription(" ");
         barChart3.animateY(5000);
     }
-
-
 
 }

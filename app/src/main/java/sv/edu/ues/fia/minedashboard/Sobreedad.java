@@ -18,7 +18,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import java.util.ArrayList;
 
 public class Sobreedad extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
+    float porcentSob;
     Spinner deptosSpinner;
     Spinner muniSpinner;
     ControlDB helper;
@@ -63,13 +63,13 @@ public class Sobreedad extends AppCompatActivity implements AdapterView.OnItemSe
         valsX.add("Sin sobreedad ");
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.RED);
-        colors.add(Color.YELLOW);
-        PieDataSet set1 = new PieDataSet(valsY, "SOBREEDAD NACIONAL");
+        colors.add(Color.GREEN);
+        PieDataSet set1 = new PieDataSet(valsY, "SOBREEDAD ESCOLAR");
         set1.setSliceSpace(0f);
         set1.setColors(colors);
         PieData dato1 = new PieData(valsX, set1);
         pieChart.setData(dato1);
-        pieChart.setDescription(" ");
+        pieChart.setDescription("*Este indicador solo inlcuye estudiantes del Nivel de Edu. Básica y Edu. Media");
         pieChart.invalidate();
 
     }
@@ -165,7 +165,7 @@ public class Sobreedad extends AppCompatActivity implements AdapterView.OnItemSe
     public void consultar(View view){
         String depa = deptosSpinner.getSelectedItem().toString();
         String muni = muniSpinner.getSelectedItem().toString();
-        String idDepto, idMuni;
+        String id_depto = null, id_muni = null;
 //consulta del id_depto;
         helper = new ControlDB(this, null, null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -173,32 +173,55 @@ public class Sobreedad extends AppCompatActivity implements AdapterView.OnItemSe
         if(rd != null){
             try{
                 if(rd.moveToFirst()){
-                    idDepto=rd.getString(0);
+                    id_depto=rd.getString(0);
                 }
             }catch (Exception e){}
         }
-//consulta del id_mun
-        helper = new ControlDB(this, null, null, 1);
-        SQLiteDatabase db2 = helper.getWritableDatabase();
-        Cursor rd2 = db2.rawQuery("select id_depto from Municipio where nombre ='"+muni+"'", null);
-        if(rd != null){
-            try{
-                if(rd2.moveToFirst()){
-                    idMuni=rd.getString(0);
-                }
-            }catch (Exception e){}
+///Consulta los datos del indicador
+        if(muni.equals(" ")){
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db3 = helper.getWritableDatabase();
+            Cursor rd3 = db3.rawQuery("select * from Sobreedad where codJurisdiccion='"+id_depto+"'", null);
+            if(rd != null){
+                try{
+                    if(rd3.moveToFirst()){
+                        porcentSob = rd3.getFloat(3);
+                    }
+                }catch (Exception e){}
+            }
+
+        }else{
+            //Consulta del id_mun
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db2 = helper.getWritableDatabase();
+            Cursor rd2 = db2.rawQuery("select id_mun from Municipio where nombre ='"+muni+"'", null);
+            if(rd != null){
+                try{
+                    if(rd2.moveToFirst()){
+                        id_muni = rd2.getString(0);
+                    }
+                }catch (Exception e){}
+            }
+
+            helper = new ControlDB(this, null, null, 1);
+            SQLiteDatabase db4 = helper.getWritableDatabase();
+            Cursor rd4 = db4.rawQuery("select * from Sobreedad where codJurisdiccion='"+id_muni+"'", null);
+            if(rd != null){
+                try{
+                    if(rd4.moveToFirst()){
+                        porcentSob = rd4.getFloat(3);
+                    }
+                }catch (Exception e){}
+            }
         }
-
-        float porcentSob= (float) 9.40;
-
 
         Graficar(depa, muni,porcentSob);
     }
 
     public void Graficar(String depto, String mun, float porcentSob){
-       // porcentSob = (float) 9.40;
+
         pieChart.setHoleRadius(0f);
-        pieChart.setRotationEnabled(false);
+        pieChart.setRotationEnabled(true);
         pieChart.animateXY(1500, 1500);
         ArrayList<Entry> valsY = new ArrayList<Entry>();
         valsY.add(new Entry(porcentSob, 0));
@@ -208,13 +231,13 @@ public class Sobreedad extends AppCompatActivity implements AdapterView.OnItemSe
         valsX.add("Sin sobreedad ");
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.RED);
-        colors.add(Color.YELLOW);
-        PieDataSet set1 = new PieDataSet(valsY, "SOBREEDAD NACIONAL");
+        colors.add(Color.GREEN);
+        PieDataSet set1 = new PieDataSet(valsY, "SOBREEDAD ESCOLAR");
         set1.setSliceSpace(0f);
         set1.setColors(colors);
         PieData dato1 = new PieData(valsX, set1);
         pieChart.setData(dato1);
-        pieChart.setDescription(" ");
+        pieChart.setDescription("*Este indicador solo inlcuye estudiantes del Nivel de Edu. Básica y Edu. Media");
         pieChart.invalidate();
     }
 }
