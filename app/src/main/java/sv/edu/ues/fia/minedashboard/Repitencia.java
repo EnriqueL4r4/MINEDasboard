@@ -66,7 +66,7 @@ public class Repitencia extends AppCompatActivity implements AdapterView.OnItemS
         valsX.add("No repiten ");
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.RED);
-        colors.add(Color.LTGRAY);
+        colors.add(Color.GREEN);
         PieDataSet set1 = new PieDataSet(valsY, "REPITENCIA ESCOLAR");
         set1.setSliceSpace(0f);
         set1.setColors(colors);

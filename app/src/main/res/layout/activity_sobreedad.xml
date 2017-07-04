@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".Sobreedad">
 
     <ScrollView
@@ -33,7 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/sobreedad" />
+                android:text="@string/sobreedad"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -63,12 +66,15 @@
                 android:layout_margin="10dp" />
 
             <Button
-                android:id="@+id/consultar"
+                android:id="@+id/consultar_sob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
                 android:onClick="consultar"
-                android:text="@string/consultar" />
+                android:text="@string/consultar_sobreedad_escolar"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"

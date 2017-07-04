@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".CentroEducativo">
 
     <ScrollView
@@ -33,7 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="CENTROS EDUCATIVOS" />
+                android:text="CENTROS EDUCATIVOS"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -67,8 +70,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
                 android:onClick="consultar"
-                android:text="@string/consultar" />
+                android:text="@string/consultar"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"

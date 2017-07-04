@@ -92,8 +92,8 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
         valsY.add(new Entry(privado,0));
         valsY.add(new Entry(publico,1));
         ArrayList<String> valsX = new ArrayList<String>();
-        valsX.add("%Privados");
-        valsX.add("%Públicos");
+        valsX.add("% Privados");
+        valsX.add("% Públicos");
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.RED);
         colors.add(Color.GREEN);
@@ -195,7 +195,7 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
         }
 
 
-        ArrayList<Municipio> municpios = new ArrayList<Municipio>();
+        ArrayList<Municipio> municipios = new ArrayList<Municipio>();
         try {
             helper = new ControlDB(this, null, null, 1);
             SQLiteDatabase db = helper.getReadableDatabase();
@@ -206,12 +206,12 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
                 muni.setId_mun(rd.getString(0));
                 muni.setNombre(rd.getString(1));
                 muni.setId_depto(rd.getString(2));
-                municpios.add(muni);
+                municipios.add(muni);
             }
         } catch (Exception e){}
 
         muniSpinner = (Spinner) findViewById(R.id.sp_municipio);
-        ArrayAdapter<Municipio> adaptador = new ArrayAdapter<Municipio>(this, android.R.layout.simple_spinner_dropdown_item, municpios);
+        ArrayAdapter<Municipio> adaptador = new ArrayAdapter<Municipio>(this, android.R.layout.simple_spinner_dropdown_item, municipios);
         muniSpinner.setAdapter(adaptador);
     }
 
@@ -233,7 +233,7 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
         if(rd != null){
             try{
                 if(rd.moveToFirst()){
-                    id_depto=rd.getString(0);
+                    id_depto = rd.getString(0);
                 }
             }catch (Exception e){}
         }
@@ -320,7 +320,7 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
         set1.setColors(colors);
         PieData dato1 = new PieData(valsX, set1);
         pieChart.setData(dato1);
-        pieChart.setDescription("Cantidad de estudiantes, Sector Privado: "+cantPrivado+"; Sector Público:"+cantPublico);
+        pieChart.setDescription("Cantidad de Centros Educativos, Sector Privado: "+cantPrivado+"; Sector Público: "+cantPublico);
         pieChart.invalidate();
 
         //C.E. POR ZONA
@@ -333,8 +333,8 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
         valsY1.add(new Entry(rural, 0));
         valsY1.add(new Entry(urbano, 1));
         ArrayList<String> valsX1 = new ArrayList<String>();
-        valsX1.add("%Rural");
-        valsX1.add("%Urbano");
+        valsX1.add("% Rural");
+        valsX1.add("% Urbano");
         ArrayList<Integer> colors1 = new ArrayList<Integer>();
         colors1.add(Color.GREEN);
         colors1.add(Color.BLUE);
@@ -343,7 +343,7 @@ public class CentroEducativo extends AppCompatActivity implements AdapterView.On
         set2.setColors(colors1);
         PieData dato2 = new PieData(valsX1, set2);
         pieChart2.setData(dato2);
-        pieChart2.setDescription("Cantidad de estudiantes, Zona Rural: "+cantRural+"; Zona Urbana: "+cantUrbano);
+        pieChart2.setDescription("Cantidad de Centros Educativos, Zona Rural: "+cantRural+"; Zona Urbana: "+cantUrbano);
         pieChart2.invalidate();
     }
 }

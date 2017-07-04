@@ -92,8 +92,8 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
 
 
         //MATRICULA POR SECTOR
-        int cantPrivado = 234495;
-        int cantPublico = 1261057;
+        float cantPrivado = 234495;
+        float cantPublico = 1261057;
         float privado = (cantPrivado*100/cantTotal);
         float publico = (cantPublico*100/cantTotal);
 
@@ -104,8 +104,8 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         valsY.add(new Entry(privado,0));
         valsY.add(new Entry(publico,1));
         ArrayList<String> valsX = new ArrayList<String>();
-        valsX.add("%Privados");
-        valsX.add("%Públicos");
+        valsX.add("% Privados");
+        valsX.add("% Públicos");
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.BLUE);
         colors.add(Color.GREEN);
@@ -129,8 +129,8 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         valsY1.add(new Entry(rural, 0));
         valsY1.add(new Entry(urbano,1));
         ArrayList<String> valsX1 = new ArrayList<String>();
-        valsX1.add("%Rural");
-        valsX1.add("%Urbano");
+        valsX1.add("% Rural");
+        valsX1.add("% Urbano");
         ArrayList<Integer> colors1 = new ArrayList<Integer>();
         colors1.add(Color.GREEN);
         colors1.add(Color.RED);
@@ -385,8 +385,8 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         valsY.add(new Entry(privado,0));
         valsY.add(new Entry(publico,1));
         ArrayList<String> valsX = new ArrayList<String>();
-        valsX.add("%Privados");
-        valsX.add("%Públicos");
+        valsX.add("% Privados");
+        valsX.add("% Públicos");
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.BLUE);
         colors.add(Color.GREEN);
@@ -395,7 +395,7 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         set1.setColors(colors);
         PieData dato1 = new PieData(valsX, set1);
         pieChart.setData(dato1);
-        pieChart.setDescription("Cantidad de estudiantes, Sector Privado: "+cantPrivado+"; Sector Público: "+cantPublico);
+        pieChart.setDescription("Cantidad de estudiantes, \nSector Privado: "+cantPrivado+ "\nSector Público: "+cantPublico);
         pieChart.invalidate();
 
         //MATRICULA POR ZONA
@@ -408,8 +408,8 @@ public class MatriculaEscolar extends AppCompatActivity implements AdapterView.O
         valsY1.add(new Entry(rural, 0));
         valsY1.add(new Entry(urbano,1));
         ArrayList<String> valsX1 = new ArrayList<String>();
-        valsX1.add("%Rural");
-        valsX1.add("%Urbano");
+        valsX1.add("% Rural");
+        valsX1.add("% Urbano");
         ArrayList<Integer> colors1 = new ArrayList<Integer>();
         colors1.add(Color.GREEN);
         colors1.add(Color.RED);
