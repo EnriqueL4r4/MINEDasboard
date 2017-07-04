@@ -22,11 +22,10 @@
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/centro"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.65"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1" />
 
@@ -96,9 +95,9 @@
 
     <Button
         android:id="@+id/aboutUs"
-        android:layout_width="83dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:onClick="about_us"
         android:text="@string/about_us"
@@ -111,7 +110,7 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintHorizontal_bias="0.076" />
+        app:layout_constraintHorizontal_bias="0.513" />
 
     <TextView
         android:id="@+id/textView7"
@@ -175,6 +174,23 @@
         app:layout_constraintLeft_toLeftOf="@+id/matricula"
         app:layout_constraintRight_toRightOf="@+id/matricula"
         app:layout_constraintTop_toBottomOf="@+id/matricula"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:text="Indicadores"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
