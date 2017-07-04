@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">MINEDashboard</string>
-    <string name="textView">INDICADORES EDUCATIVOS</string>
-    <string name="consultar">Consultar Centros Educativos</string>
+    <string name="textView">Indicadores Educativos</string>
+    <string name="consultar">CONSULTAR CENTROS EDUCATIVOS</string>
     <string name="departamento">Departamento:</string>
     <string name="matricula_escolar">MATRICULA ESCOLAR</string>
     <string name="municipio">Municipio:</string>
     <string name="centros_educativos">CENTROS EDUCATIVOS</string>
     <string name="sobreedad">SOBREEDAD</string>
     <string name="about_us">About us</string>
-    <string name="indicadores_educativos">INDICADORES EDUCATIVOS</string>
+    <string name="indicadores_educativos">Indicadores Educativos</string>
     <string name="bienvenido">¡BIENVENIDO/A!</string>
     <string name="consultar_matricula_escolar">CONSULTAR MATRICULA ESCOLAR</string>
     <string name="consultar_sobreedad_escolar">CONSULTAR SOBREEDAD ESCOLAR</string>

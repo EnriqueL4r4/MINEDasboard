@@ -38,11 +38,11 @@
         android:fontFamily="sans-serif"
         android:text="@string/indicadores_educativos"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/centro"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -116,13 +116,13 @@
 
     <Button
         android:id="@+id/aboutUs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="83dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/transparent"
         android:onClick="about_us"
         android:text="@string/about_us"
-        android:textColor="@android:color/background_light"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,7 +130,8 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintHorizontal_bias="0.077" />
 
     <TextView
         android:id="@+id/textView7"
