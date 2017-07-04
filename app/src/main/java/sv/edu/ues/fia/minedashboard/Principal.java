@@ -12,6 +12,8 @@ public class Principal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
+        Toast.makeText(this, "¡Bienvenido/a!",Toast.LENGTH_LONG).show();
     }
 
     //ImageButton para Centros Educativos
@@ -39,11 +41,12 @@ public class Principal extends AppCompatActivity {
     }
 
     public void about_us(View view){
-        Toast.makeText(this, " Somos: Cristian Aguilar, Wendy Gómez, Enrique Lara, Sofía Martínez y Walter Velis; " , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "App MINEDashboard® 2017 Ministerio de Educación es una aplicación desarrollada por:", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Cristian Aguilar, Wendy Gómez, Enrique Lara, Sofía Martínez y Walter Velis." , Toast.LENGTH_LONG).show();
         Toast.makeText(this, "Estudiantes de Ingeniería de Sistemas Informáticos, FIA, UES", Toast.LENGTH_LONG).show();
         Toast.makeText(this, "Cátedra de Programación para Dispositivos Móviles, Docente: Ing. William Vides ", Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "Contacto MINED: Ing. Edwin Ramírez, Coordinador de Servicios de Información y Divulgación", Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "App MINEDashboard® 2016 Ministerio de Educaciòn", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Coordinado por el Ing. Edwin Ramírez, Coordinador de Servicios de Información y Divulgación, MINED", Toast.LENGTH_LONG).show();
+
     }
 
 }
